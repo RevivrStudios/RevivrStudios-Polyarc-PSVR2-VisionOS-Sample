@@ -1,0 +1,12 @@
+diff --git a/Engine/Source/Programs/UnrealPak/UnrealPak.Target.cs b/Engine/Source/Programs/UnrealPak/UnrealPak.Target.cs
+index 576221d41a0..c59e2d6f8a1 100644
+--- a/Engine/Source/Programs/UnrealPak/UnrealPak.Target.cs
++++ b/Engine/Source/Programs/UnrealPak/UnrealPak.Target.cs
+@@ -10,6 +10,7 @@ public class UnrealPakTarget : TargetRules
+ 		LinkType = TargetLinkType.Modular;
+ 		IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
+ 		LaunchModuleName = "UnrealPak";
++		AdditionalCompilerArguments = "-Wno-error=implicit-int-float-conversion -Wno-error=implicit-int-conversion -Wno-error=implicit-int-conversion-on-negation";
+ 
+ 		bUseXGEController					= false;
+ 		bCompileFreeType					= false;

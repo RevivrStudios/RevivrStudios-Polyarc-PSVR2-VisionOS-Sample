@@ -1,0 +1,27 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Spatial Accessory Tracking",
+	"Description": "6DOF positional tracking for PSVR2 Sense controllers via ARKit AccessoryTrackingProvider on visionOS 26+",
+	"Category": "Input",
+	"CreatedBy": "Public Sample Contributors",
+	"EnabledByDefault": true,
+	"CanContainContent": false,
+	"Plugins": [
+		{
+			"Name": "XRBase",
+			"Enabled": true
+		}
+	],
+	"Modules": [
+		{
+			"Name": "SpatialAccessoryTracking",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"PlatformAllowList": [
+				"VisionOS"
+			]
+		}
+	]
+}

@@ -1,0 +1,53 @@
+# Unreal generated output
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+Build/*/*.PackageVersionCounter
+Build/*/FileOpenOrder/
+
+# Generated IDE/project files
+*.xcworkspace/
+*.xcodeproj/
+*.sln
+*.suo
+*.opensdf
+*.sdf
+*.user
+*.user.proj
+*.VC.db
+*.VC.opendb
+CMakeLists.txt
+
+# Packaged builds and local archives
+ArchivedBuilds/
+dist/
+*.ipa
+*.app
+*.dSYM
+
+# Local OS/editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.tmp
+
+# Keep source assets and project content tracked
+!Content/
+!Content/**
+!Config/
+!Config/**
+!Source/
+!Source/**
+!Plugins/
+!Plugins/**
+!Build/
+!Build/**
+
+# Re-apply generated Build ignores after the Build exception above
+Build/*/*.PackageVersionCounter
+Build/*/FileOpenOrder/
+
+# Re-apply generated plugin output ignores after the Plugins exception above
+Plugins/*/Binaries/
+Plugins/*/Intermediate/
