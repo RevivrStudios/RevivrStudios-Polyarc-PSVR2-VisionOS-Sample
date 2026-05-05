@@ -27,6 +27,8 @@ DEST_DIR="$1"
 PROJECT_NAME="${2:-$(basename "$DEST_DIR")}"
 BUNDLE_ID="${3:-}"
 UPROJECT_NAME="${PROJECT_NAME}.uproject"
+SOURCE_PROJECT_NAME="My_Project"
+SOURCE_PROJECT_API="MY_PROJECT_API"
 
 if [[ "$DEST_DIR" != /* ]]; then
 	echo "Destination must be an absolute path: $DEST_DIR"
@@ -43,6 +45,7 @@ if [[ -z "$MODULE_NAME" || ! "$MODULE_NAME" =~ '^[A-Za-z_][A-Za-z0-9_]*$' ]]; th
 	echo "ProjectName must contain at least one letter or underscore after sanitizing: $PROJECT_NAME"
 	exit 64
 fi
+MODULE_API="$(print -r -- "$MODULE_NAME" | tr '[:lower:]' '[:upper:]')_API"
 
 if [[ -n "$BUNDLE_ID" && ! "$BUNDLE_ID" =~ '^[A-Za-z0-9][A-Za-z0-9.-]*\.[A-Za-z0-9-]+$' ]]; then
 	echo "BundleIdentifier must look like a reverse-DNS identifier: $BUNDLE_ID"
@@ -67,13 +70,13 @@ rsync -a \
 	--exclude='.DS_Store' \
 	"$SOURCE_DIR/" "$DEST_DIR/"
 
-mv "$DEST_DIR/VisionPro.uproject" "$DEST_DIR/$UPROJECT_NAME"
-mv "$DEST_DIR/Source/PolyarcSample" "$DEST_DIR/Source/$MODULE_NAME"
-mv "$DEST_DIR/Source/PolyarcSample.Target.cs" "$DEST_DIR/Source/$MODULE_NAME.Target.cs"
-mv "$DEST_DIR/Source/PolyarcSampleEditor.Target.cs" "$DEST_DIR/Source/${MODULE_NAME}Editor.Target.cs"
-mv "$DEST_DIR/Source/$MODULE_NAME/PolyarcSample.Build.cs" "$DEST_DIR/Source/$MODULE_NAME/$MODULE_NAME.Build.cs"
-mv "$DEST_DIR/Source/$MODULE_NAME/PolyarcSample.cpp" "$DEST_DIR/Source/$MODULE_NAME/$MODULE_NAME.cpp"
-mv "$DEST_DIR/Source/$MODULE_NAME/PolyarcSample.h" "$DEST_DIR/Source/$MODULE_NAME/$MODULE_NAME.h"
+mv "$DEST_DIR/${SOURCE_PROJECT_NAME}.uproject" "$DEST_DIR/$UPROJECT_NAME"
+mv "$DEST_DIR/Source/$SOURCE_PROJECT_NAME" "$DEST_DIR/Source/$MODULE_NAME"
+mv "$DEST_DIR/Source/${SOURCE_PROJECT_NAME}.Target.cs" "$DEST_DIR/Source/$MODULE_NAME.Target.cs"
+mv "$DEST_DIR/Source/${SOURCE_PROJECT_NAME}Editor.Target.cs" "$DEST_DIR/Source/${MODULE_NAME}Editor.Target.cs"
+mv "$DEST_DIR/Source/$MODULE_NAME/${SOURCE_PROJECT_NAME}.Build.cs" "$DEST_DIR/Source/$MODULE_NAME/$MODULE_NAME.Build.cs"
+mv "$DEST_DIR/Source/$MODULE_NAME/${SOURCE_PROJECT_NAME}.cpp" "$DEST_DIR/Source/$MODULE_NAME/$MODULE_NAME.cpp"
+mv "$DEST_DIR/Source/$MODULE_NAME/${SOURCE_PROJECT_NAME}.h" "$DEST_DIR/Source/$MODULE_NAME/$MODULE_NAME.h"
 
 rename_files=(
 	"$DEST_DIR/$UPROJECT_NAME"
@@ -87,8 +90,12 @@ rename_files=(
 
 for file in "${rename_files[@]}"; do
 	[[ -f "$file" ]] || continue
-	perl -0pi -e "s/PolyarcSample/$MODULE_NAME/g; s/VisionPro\\.uproject/$UPROJECT_NAME/g" "$file"
+	perl -0pi -e "s/\\Q$SOURCE_PROJECT_NAME\\E/$MODULE_NAME/g; s/\\Q$SOURCE_PROJECT_API\\E/$MODULE_API/g; s/VisionPro\\.uproject/$UPROJECT_NAME/g" "$file"
 done
+
+while IFS= read -r -d '' file; do
+	perl -0pi -e "s/\\Q$SOURCE_PROJECT_NAME\\E/$MODULE_NAME/g; s/\\Q$SOURCE_PROJECT_API\\E/$MODULE_API/g; s/VisionPro\\.uproject/$UPROJECT_NAME/g" "$file"
+done < <(find "$DEST_DIR/Source/$MODULE_NAME" -type f -print0)
 
 if [[ -f "$DEST_DIR/Source/$MODULE_NAME/$MODULE_NAME.cpp" ]]; then
 	perl -0pi -e "s/#include \"$MODULE_NAME\\.h\"/#include \"$MODULE_NAME.h\"/g" "$DEST_DIR/Source/$MODULE_NAME/$MODULE_NAME.cpp"

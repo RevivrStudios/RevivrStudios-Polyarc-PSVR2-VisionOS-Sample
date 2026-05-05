@@ -10,10 +10,10 @@ Polyarc-PSVR2-VisionOS-Sample
 
 ## How To Start A New Project
 
-Use the template helper so generated Unreal files are not copied into the new project and the new project is not left with the `PolyarcSample` module name:
+Use the template helper so generated Unreal files are not copied into the new project and the new project is not left with the template module name:
 
 ```zsh
-"/path/to/Polyarc-PSVR2-VisionOS-Template/Tools/create-project-from-template.sh" "/path/to/UE_Projects/MyNewVisionProject" MyNewVisionProject com.example.MyNewVisionProject
+"/path/to/RevivrStudios-Polyarc-PSVR2-VisionOS-Sample/Tools/create-project-from-template.sh" "/path/to/UE_Projects/MyNewVisionProject" MyNewVisionProject com.example.MyNewVisionProject
 ```
 
 The destination folder must not already exist. `ProjectName` and `BundleIdentifier` are optional, but provide them when you already know the Apple signing bundle ID. If omitted, `ProjectName` defaults to the destination folder name.
@@ -48,13 +48,13 @@ Only after that baseline works should you rename modules, change maps, import la
 Before creating a new project, check the master template:
 
 ```zsh
-"/path/to/Polyarc-PSVR2-VisionOS-Template/Tools/validate-template-clean.sh"
+"/path/to/RevivrStudios-Polyarc-PSVR2-VisionOS-Sample/Tools/validate-template-clean.sh"
 ```
 
 If generated local Unreal/Xcode output is present and you want to remove it from the master folder:
 
 ```zsh
-"/path/to/Polyarc-PSVR2-VisionOS-Template/Tools/validate-template-clean.sh" --clean
+"/path/to/RevivrStudios-Polyarc-PSVR2-VisionOS-Sample/Tools/validate-template-clean.sh" --clean
 ```
 
 This does not remove durable source, config, content, plugins, docs, or patches.

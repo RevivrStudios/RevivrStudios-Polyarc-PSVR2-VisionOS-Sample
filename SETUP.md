@@ -48,7 +48,7 @@ First inspect:
 README.md
 SETUP.md
 TROUBLESHOOTING.md
-VisionPro.uproject
+My_Project.uproject
 Plugins/SpatialAccessoryTracking/
 Config/
 Source/
@@ -90,8 +90,8 @@ Install Git LFS before cloning:
 
 ```bash
 git lfs install
-git clone https://github.com/your-org/Polyarc-PSVR2-VisionOS-Sample.git
-cd Polyarc-PSVR2-VisionOS-Sample
+git clone https://github.com/RevivrStudios/RevivrStudios-Polyarc-PSVR2-VisionOS-Sample.git
+cd RevivrStudios-Polyarc-PSVR2-VisionOS-Sample
 git lfs pull
 ```
 
@@ -117,7 +117,7 @@ Expected local shape is similar to:
 Open this project with that editor build:
 
 ```text
-VisionPro.uproject
+My_Project.uproject
 ```
 
 On macOS, the editor app is usually under:
@@ -137,7 +137,7 @@ implicit conversion ... may lose precision [-Werror,-Wimplicit-int-float-convers
 If this happens, apply the engine patch from the root of the Polyarc Unreal Engine checkout:
 
 ```bash
-git apply /path/to/Polyarc-PSVR2-VisionOS-Sample/patches/polyarc-ue56-xcode-26.4-unrealpak.patch
+git apply /path/to/RevivrStudios-Polyarc-PSVR2-VisionOS-Sample/patches/polyarc-ue56-xcode-26.4-unrealpak.patch
 ```
 
 This does not change the selected Xcode version. It only changes the engine `UnrealPak` target so the known conversion diagnostics remain warnings instead of stopping packaging.
@@ -149,12 +149,12 @@ After applying the patch, rebuild or allow Unreal packaging to rebuild `UnrealPa
 Open:
 
 ```text
-VisionPro.uproject
+My_Project.uproject
 ```
 
 Use the Polyarc UE 5.6 editor, not a stock Epic launcher engine.
 
-If Unreal shows a missing module dialog for `OpenXREyeTracker`, check `VisionPro.uproject`. It should contain:
+If Unreal shows a missing module dialog for `OpenXREyeTracker`, check `My_Project.uproject`. It should contain:
 
 ```json
 {

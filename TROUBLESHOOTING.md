@@ -27,7 +27,7 @@ Use the bundle identifier shown in Xcode for the generated project. If you creat
 
 ## Missing Module: OpenXREyeTracker
 
-`OpenXREyeTracker` should be disabled for this project. Check `VisionPro.uproject` and confirm:
+`OpenXREyeTracker` should be disabled for this project. Check `My_Project.uproject` and confirm:
 
 ```json
 {
@@ -68,7 +68,7 @@ Then check:
 
 - PSVR2 Sense controllers are paired to visionOS.
 - Controllers show as connected before launching the app.
-- `SpatialAccessoryTracking` is enabled in `VisionPro.uproject`.
+- `SpatialAccessoryTracking` is enabled in `My_Project.uproject`.
 - The generated Xcode project includes the current plugin output after a fresh Unreal package step.
 
 ## Swift NSLock Warnings
