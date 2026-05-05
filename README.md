@@ -11,7 +11,7 @@ This is a technical sample, not a turnkey binary release. You will need a compat
 - Apple Vision Pro with Developer Mode enabled.
 - PSVR2 Sense controllers paired to visionOS.
 - macOS with Xcode and the visionOS SDK installed.
-- A built Polyarc Unreal Engine 5.6 checkout compatible with this sample.
+- A built Polyarc Unreal Engine 5.6 checkout compatible with this sample. You can obtain Polyarc's Unreal Engine version at https://polyarcgames.github.io.
 - Apple Developer account/team configured in Xcode for device deployment.
 - Git LFS installed before cloning.
 
