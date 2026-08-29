@@ -94,12 +94,11 @@ public:
 	virtual void ResetOrientationAndPosition(float Yaw = 0.f) override
 	{ Inner->ResetOrientationAndPosition(Yaw); }
 
-PRAGMA_DISABLE_DEPRECATION_WARNINGS
-	virtual void GetMotionControllerData(UObject* WorldContext,
-	                                     const EControllerHand Hand,
-	                                     FXRMotionControllerData& MotionControllerData) override
-	{ Inner->GetMotionControllerData(WorldContext, Hand, MotionControllerData); }
-PRAGMA_ENABLE_DEPRECATION_WARNINGS
+	// UE 5.8: GetMotionControllerData / FXRMotionControllerData were REMOVED from IXRTrackingSystem
+	// (deprecated in 5.5). A decorator can only forward virtuals its base still declares, so the
+	// forwarder is deleted rather than migrated — there is no behavior to port. Its replacements,
+	// GetMotionControllerState (controller pose) and GetHandTrackingState (joints), are forwarded
+	// immediately below and were already what the rest of this plugin calls.
 
 	virtual void GetMotionControllerState(UObject* WorldContext,
 	                                      const EXRSpaceType XRSpaceType,
@@ -126,8 +125,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	virtual bool DoesSupportLateProjectionUpdate() const override
 	{ return Inner->DoesSupportLateProjectionUpdate(); }
 
-	virtual void RebaseObjectOrientationAndPosition(FVector& Position, FQuat& Orientation) const override
-	{ Inner->RebaseObjectOrientationAndPosition(Position, Orientation); }
+	// UE 5.8: RebaseObjectOrientationAndPosition was REMOVED from IXRTrackingSystem (it was a
+	// do-nothing `{}` default in 5.5/5.6 and had no callers in this plugin). Nothing to forward.
 
 	virtual FVector GetAudioListenerOffset(int32 DeviceId = HMDDeviceId) const override
 	{ return Inner->GetAudioListenerOffset(DeviceId); }

@@ -49,7 +49,10 @@ public:
 
     // Defer XR system wrapping until after the engine is fully initialised
     // (GEngine->XRSystem is not populated yet during StartupModule).
-    PostEngineInitHandle = FCoreDelegates::OnPostEngineInit.AddRaw(
+    // UE 5.8: the OnPostEngineInit member delegate is deprecated in favour of the
+    // GetOnPostEngineInit() accessor, and the deprecation warns it will stop compiling in the
+    // next release. Same delegate, same semantics.
+    PostEngineInitHandle = FCoreDelegates::GetOnPostEngineInit().AddRaw(
         this, &FSpatialAccessoryTrackingModule::OnPostEngineInit);
 #endif
 
@@ -77,7 +80,7 @@ public:
       XRWrapper.Reset();
     }
 
-    FCoreDelegates::OnPostEngineInit.Remove(PostEngineInitHandle);
+    FCoreDelegates::GetOnPostEngineInit().Remove(PostEngineInitHandle);
 
     IModularFeatures::Get().UnregisterModularFeature(
         IMotionController::GetModularFeatureName(), &MotionController);
